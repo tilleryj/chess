@@ -7,6 +7,12 @@ gem 'rails', '3.0.1'
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
+gem 'high_voltage'
+gem "jquery-rails"
+
+gem 'compass'
+gem 'compass-960-plugin', :require => 'ninesixty'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

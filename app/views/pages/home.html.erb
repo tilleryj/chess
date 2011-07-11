@@ -1,0 +1,53 @@
+
+
+<div class="container_12">
+	<div class="grid_12">
+		&#9812;
+		
+		<ol>
+			<li>Step 1: Create a chess AI that can beat me in chess</li>
+			<li>Step 2: Improve at chess until I can beat my AI</li>
+			<li>Step 3: Return to step 1</li>
+		</ol>
+		
+		
+		<h2>Background</h2>
+		<p>
+			I've always been interested in AI. I took some courses in college and played around with a few projects in my
+			free time, but I've never really dove into anything substantial. Not that I haven't wanted to, I just haven't had
+			anything real to work on, anything to motivate me. I didn't have anything that was both realistic and rewarding.
+		</p>
+		<p>
+			I've been playing chess for a long time and have always enjoyed it. I played maybe one or two games
+			a month, but nonetheless I was an average player. I recently started playing a lot more often, several games a day
+			and started thinking about the idea of building a chess AI. There is a wonderful symmetry about this problem. Building
+			the AI would most likely make you a better chess player, which in turn would make building it more complicated, and so on.
+		</p>
+		
+		<h2>Methodology</h2>
+		
+		<h3>Evaluation</h3>
+		<p>
+			The current 'leader' will be determined by a four game tournament (+1 for a win, +1/2 for a draw).
+			If I'm the leader, there will be a tournament after each version of the AI.
+			If the AI is the leader, there will be a tournament when I think I've improved.
+		</p>
+
+		<h3>Code</h3>
+		<p>The AI is written in Javascript and available on Github. I add a tag for every notable version</p>
+
+		<h3>Chapters</h3>
+		<p>I'll write about the events leading up to each tournament, whether they involve AI principles, chess theory or anything else.</p>
+		
+		
+		<h2>Current Implementation</h2>
+		<div id="chess"></div>
+	</div>
+	
+</div>
+<div class="clear"></div>
+
+
+<script type="text/javascript">
+	Chess.Board.create("#chess");
+</script>
