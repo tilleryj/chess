@@ -49,5 +49,13 @@
 
 
 <script type="text/javascript">
-	Chess.Board.create("#chess");
+	var game = Chess.Game.create();
+
+	Chess.Board.create({
+		elt: "#chess",
+		game: game
+	});
 </script>
+
+
+
