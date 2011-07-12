@@ -8,6 +8,11 @@
 
 @include grid-system-complete();
 
+@mixin no-select {
+	-webkit-user-select:none;
+	-moz-user-select:none;
+}
+
 body {
 	background-color: #fff;
 	font: 14px/1.5 'Helvetica Neue',Arial,'Liberation Sans',FreeSans,sans-serif;
@@ -32,3 +37,54 @@ p {
 .clear {
 	clear: both;
 }
+
+.board {
+	border: 1px solid #000;
+	
+	td {
+		@include no-select();
+		font-family: 'Times New Roman';
+		font-size: 70px;
+		width: 100px;
+		height: 100px;
+		line-height: 100px;
+		text-align: center;
+		
+		span {
+			cursor: pointer;
+		}
+		
+		&.pieceHover { background-color: #99e; }
+	}
+	
+	tr:nth-child(2n) {
+		td:nth-child(2n+1) {
+			background-color: #ccc;
+			&.pieceHover { background-color: #99e; }
+		}
+	}
+
+	tr:nth-child(2n+1) {
+		td:nth-child(2n) {
+			background-color: #ccc;
+			&.pieceHover { background-color: #99e; }
+		}
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
