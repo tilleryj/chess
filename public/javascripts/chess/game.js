@@ -1057,210 +1057,222 @@ Chess.Game = function(fen) {
     return nodes;
   }
 
-  return {
-    /***************************************************************************
-     * PUBLIC CONSTANTS (is there a better way to do this?)
-     **************************************************************************/
-    WHITE: WHITE,
-    BLACK: BLACK,
-    PAWN: PAWN,
-    KNIGHT: KNIGHT,
-    BISHOP: BISHOP,
-    ROOK: ROOK,
-    QUEEN: QUEEN,
-    KING: KING,
-    SQUARES: (function() {
-                /* from the ECMA-262 spec (section 12.6.4):
-                 * "The mechanics of enumerating the properties ... is
-                 * implementation dependent"
-                 * so: for (var sq in SQUARES) { keys.push(sq); } might not be
-                 * ordered correctly
-                 */
-                var keys = [];
-                for (var i = SQUARES.a8; i <= SQUARES.h1; i++) {
-                  if (i & 0x88) { i += 7; continue; }
-                  keys.push(algebraic(i));
-                }
-                return keys;
-              })(),
-    FLAGS: FLAGS,
+  var moveHandlers = [];
 
-    /***************************************************************************
-     * PUBLIC API
-     **************************************************************************/
-    load: function(fen) {
-      return load(fen);
-    },
+	return {
+		/***************************************************************************
+		* PUBLIC CONSTANTS (is there a better way to do this?)
+		**************************************************************************/
+		WHITE: WHITE,
+		BLACK: BLACK,
+		PAWN: PAWN,
+		KNIGHT: KNIGHT,
+		BISHOP: BISHOP,
+		ROOK: ROOK,
+		QUEEN: QUEEN,
+		KING: KING,
+		SQUARES: (function() {
+			/* from the ECMA-262 spec (section 12.6.4):
+			* "The mechanics of enumerating the properties ... is
+			* implementation dependent"
+			* so: for (var sq in SQUARES) { keys.push(sq); } might not be
+			* ordered correctly
+			*/
+			var keys = [];
+			for (var i = SQUARES.a8; i <= SQUARES.h1; i++) {
+				if (i & 0x88) { i += 7; continue; }
+				keys.push(algebraic(i));
+			}
+			return keys;
+		})(),
 
-    reset: function() {
-      return reset();
-    },
+		FLAGS: FLAGS,
 
-    moves: function(settings) {
-      /* The internal representation of a chess move is in 0x88 format, and
-       * not meant to be human-readable.  The code below converts the 0x88
-       * square coordinates to algebraic coordinates.  It also prunes an
-       * unnecessary move keys resulting from a verbose call.
-       */
+		/***************************************************************************
+		* PUBLIC API
+		**************************************************************************/
+		load: function(fen) {
+			return load(fen);
+		},
 
-      var ugly_moves = generate_moves();
-      var moves = [];
+		reset: function() {
+			return reset();
+		},
 
-      for (var i = 0, len = ugly_moves.length; i < len; i++) {
+		moves: function(settings) {
+			/* The internal representation of a chess move is in 0x88 format, and
+			* not meant to be human-readable.  The code below converts the 0x88
+			* square coordinates to algebraic coordinates.  It also prunes an
+			* unnecessary move keys resulting from a verbose call.
+			*/
 
-        /* does the user want a full move object (most likely not), or just SAN */
-        if (typeof settings != 'undefined' && 'verbose' in settings && settings.verbose) {
-          moves.push(make_pretty(ugly_moves[i]));
-        } else {
-          moves.push(move_to_san(ugly_moves[i]));
-        }
-      }
+			var ugly_moves = generate_moves();
+			var moves = [];
 
-      return moves;
-    },
+			for (var i = 0, len = ugly_moves.length; i < len; i++) {
 
-    in_check: function() {
-      return in_check();
-    },
+				/* does the user want a full move object (most likely not), or just SAN */
+				if (typeof settings != 'undefined' && 'verbose' in settings && settings.verbose) {
+					moves.push(make_pretty(ugly_moves[i]));
+				} else {
+					moves.push(move_to_san(ugly_moves[i]));
+				}
+			}
 
-    in_checkmate: function() {
-      return in_checkmate();
-    },
+			return moves;
+		},
 
-    in_stalemate: function() {
-      return in_stalemate();
-    },
+		in_check: function() {
+			return in_check();
+		},
 
-    in_draw: function() {
-      return half_moves >= 100 ||
-             in_stalemate() ||
-             insufficient_material() ||
-             in_threefold_repetition();
-    },
+		in_checkmate: function() {
+			return in_checkmate();
+		},
 
-    insufficient_material: function() {
-      return insufficient_material();
-    },
+		in_stalemate: function() {
+			return in_stalemate();
+		},
 
-    in_threefold_repetition: function() {
-      return in_threefold_repetition();
-    },
+		in_draw: function() {
+			return half_moves >= 100 ||
+			in_stalemate() ||
+			insufficient_material() ||
+			in_threefold_repetition();
+		},
 
-    game_over: function() {
-      return half_moves >= 100 ||
-             in_checkmate() ||
-             in_stalemate() ||
-             insufficient_material() ||
-             in_threefold_repetition();
-    },
+		insufficient_material: function() {
+			return insufficient_material();
+		},
 
-    fen: function() {
-      return generate_fen();
-    },
+		in_threefold_repetition: function() {
+			return in_threefold_repetition();
+		},
 
-    // options_obj can contain width and a newline character
-    // example for html usage: options_obj = {max_width:72, newline_char:"<br />"}
-    pgn: function(options_obj) {
-      return generate_pgn(options_obj);
-    },
+		game_over: function() {
+			return half_moves >= 100 ||
+			in_checkmate() ||
+			in_stalemate() ||
+			insufficient_material() ||
+			in_threefold_repetition();
+		},
 
-    info: function() {
-      return set_info(arguments);
-    },
+		fen: function() {
+			return generate_fen();
+		},
 
-    ascii: function() {
-      return ascii();
-    },
+		// options_obj can contain width and a newline character
+		// example for html usage: options_obj = {max_width:72, newline_char:"<br />"}
+		pgn: function(options_obj) {
+			return generate_pgn(options_obj);
+		},
 
-    turn: function() {
-      return turn;
-    },
+		info: function() {
+			return set_info(arguments);
+		},
 
-    move: function(move) {
-      /* The move function can be called with in the following parameters:
-       *
-       * .move('Nxb7')      <- where 'move' is a case-sensitive SAN string
-       *
-       * .move({ from: 'h7', <- where the 'move' is a move object (additional
-       *         to :'h8',      fields are ignored)
-       *         promotion: 'q',
-       *      })
-       */
-      var move_obj = null;
-      var moves = generate_moves();
+		ascii: function() {
+			return ascii();
+		},
 
-      if (typeof move == 'string') {
-        /* convert the move string to a move object */
-        for (var i = 0, len = moves.length; i < len; i++) {
-          if (move == move_to_san(moves[i])) {
-            move_obj = moves[i];
-            break;
-          }
-        }
-      } else if (typeof move == 'object') {
-        /* convert the move string to a move object */
-        for (var i = 0, len = moves.length; i < len; i++) {
-          if (move.from == algebraic(moves[i].from) &&
-              move.to == algebraic(moves[i].to) &&
-              (!('promotion' in moves[i]) ||
-              move.promotion == moves[i].promotion)) {
-            move_obj = moves[i];
-            break;
-          }
-        }
-      }
+		turn: function() {
+			return turn;
+		},
 
-      /* failed to find move */
-      if (!move_obj) {
-        return null;
-      }
+		move: function(move) {
+			/* The move function can be called with in the following parameters:
+			*
+			* .move('Nxb7')      <- where 'move' is a case-sensitive SAN string
+			*
+			* .move({ from: 'h7', <- where the 'move' is a move object (additional
+			*         to :'h8',      fields are ignored)
+			*         promotion: 'q',
+			*      })
+			*/
+			var move_obj = null;
+			var moves = generate_moves();
 
-      /* need to make a copy of move because we can't generate SAN after the
-       * move is made
-       */
-      var pretty_move = make_pretty(move_obj);
+			if (typeof move == 'string') {
+				/* convert the move string to a move object */
+				for (var i = 0, len = moves.length; i < len; i++) {
+					if (move == move_to_san(moves[i])) {
+						move_obj = moves[i];
+						break;
+					}
+				}
+			} else if (typeof move == 'object') {
+				/* convert the move string to a move object */
+				for (var i = 0, len = moves.length; i < len; i++) {
+					if (move.from == algebraic(moves[i].from) &&
+					move.to == algebraic(moves[i].to) &&
+					(!('promotion' in moves[i]) ||
+					move.promotion == moves[i].promotion)) {
+						move_obj = moves[i];
+						break;
+					}
+				}
+			}
 
-      make_move(move_obj);
+			/* failed to find move */
+			if (!move_obj) {
+				return null;
+			}
 
-      return pretty_move;
-    },
+			/* need to make a copy of move because we can't generate SAN after the
+			* move is made
+			*/
+			var pretty_move = make_pretty(move_obj);
 
-    undo: function() {
-      var move = undo_move();
-      return (move) ? make_pretty(move) : null;
-    },
+			make_move(move_obj);
 
-    clear: function() {
-      return clear();
-    },
+			for (var i=0; i < moveHandlers.length; i++) {
+				moveHandlers[i]();
+			};
 
-    put: function(piece, square) {
-      return put(piece, square);
-    },
+			return pretty_move;
+		},
 
-    get: function(square) {
-      return get(square);
-    },
+		undo: function() {
+			var move = undo_move();
+			return (move) ? make_pretty(move) : null;
+		},
 
-    remove: function(square) {
-      return remove(square);
-    },
+		clear: function() {
+			return clear();
+		},
 
-    perft: function(depth) {
-      return perft(depth);
-    },
+		put: function(piece, square) {
+			return put(piece, square);
+		},
 
-    square_color: function(square) {
-      if (square in SQUARES) {
-        var sq_0x88 = SQUARES[square];
-        return ((rank(sq_0x88) + file(sq_0x88)) % 2 == 0) ? 'light' : 'dark';
-      }
+		get: function(square) {
+			return get(square);
+		},
 
-      return null;
-    }
+		remove: function(square) {
+			return remove(square);
+		},
 
-  }
+		perft: function(depth) {
+			return perft(depth);
+		},
+
+		square_color: function(square) {
+			if (square in SQUARES) {
+				var sq_0x88 = SQUARES[square];
+				return ((rank(sq_0x88) + file(sq_0x88)) % 2 == 0) ? 'light' : 'dark';
+			}
+
+			return null;
+		},
+
+		onMove: function(callback) {
+			moveHandlers.push(callback);
+		}
+
+	};
 };
+
 Chess.Game.create = function() {
 	return new Chess.Game();
 };
