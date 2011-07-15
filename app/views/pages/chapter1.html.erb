@@ -1,0 +1,41 @@
+<div class="container_12">
+	<div class="grid_12">
+		<h2>Chapter 1: Infrastructure</h2>
+		<p>
+			In order to build, test, and play an AI in I need to build some infrastructure. 
+			This means a simple UI, an implementation of the rules of chess, and a place to put the AI code.
+		</p>
+		
+		<h3>A simple UI</h3>
+		<p>
+			As far as the UI for a game goes, chess is pretty damn easy to implement. The board is just a table with 8 rows
+			and 8 columns alternating from white to dark. The pieces can be done with a small set of images, or as
+			I found out, with a set of unicode characters that represent the chess pieces. The interaction is just a
+			few lines of jquery, and the additional elements like the move history and reset button are pretty straight
+			forward.
+		</p>
+		
+		<h3>Game engine</h3>
+		<p>
+			Building the chess engine is much more complicated than the UI. The main features of the engine are
+			determining the validity of moves and if and why a game is over. While the well defined rule set of
+			chess would make for a great exercise in BDD, I'd prefer not to spend my time this way. Luckily
+			Jeff Hlywa has already built a fantastic and full-featured open-source javascript chess engine - 
+			https://github.com/jhlywa/chess.js. Rather than reinventing the wheel, I tweaked this library adding a couple
+			of event handlers and on we go.
+		</p>
+		
+		<h3>Dumbest AI ever</h3>
+		<p>
+			With a game and a UI all I need now is a convention for asking the AI what move it will make.
+			I implemented it as a function called 'go'. My first AI choses randomly from all valid moves.
+		</p>
+		
+		<h2>Results</h2>
+		<p>
+			I beat the AI in about 5 or 6 moves every game. As you might expect, moving randomly is not very effective.
+		</p>
+		
+		<%= game(1) %>
+	</div>
+</div>

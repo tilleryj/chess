@@ -45,9 +45,9 @@ p {
 		@include no-select();
 		font-family: 'Times New Roman';
 		font-size: 70px;
-		width: 100px;
-		height: 100px;
-		line-height: 100px;
+		width: 90px;
+		height: 90px;
+		line-height: 90px;
 		text-align: center;
 		
 		span {
@@ -73,7 +73,19 @@ p {
 	
 }
 
-
+#sidePanel {
+	float: right;
+	margin-left: 20px;
+	
+	#moveList {
+		width: 200px;
+		height: 360px;
+		background-color: #eee;
+		border: 1px solid #ccc;
+		margin-top: 20px;
+		overflow: auto;
+	}
+}
 
 
 

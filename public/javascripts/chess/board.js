@@ -59,16 +59,29 @@ Chess.Board = {
 			$("td").droppable({
 				hoverClass: "pieceHover",
 				drop: function(event, ui) {
+					var square = ui.draggable.data("square");
+					var piece = game.get(square);
+					var promotion;
+					if (piece.type == "p") {
+						var row = $(this).closest("tr").index();
+						if ((piece.color == "w" && row == 0) || (piece.color == "b" && row == 7)) {
+							promotion = prompt("q=queen, r=rook, n=knight, b=bishop", "q").toLowerCase();
+						}
+					}
 					game.move({
-						from: ui.draggable.data("square"),
-						to: squareFromCell($(this)[0])
+						from: square,
+						to: squareFromCell($(this)[0]),
+						promotion: promotion
 					});
-					draw();
 				}
 			});
 		}
 
 		createBoard();
+		
+		game.onMove(function() {
+			draw();
+		});
 		draw();
 	}
 };

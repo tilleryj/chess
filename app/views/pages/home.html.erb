@@ -1,5 +1,3 @@
-
-
 <div class="container_12">
 	<div class="grid_12">
 		
@@ -38,24 +36,19 @@
 		<h3>Chapters</h3>
 		<p>I'll write about the events leading up to each tournament, whether they involve AI principles, chess theory or anything else.</p>
 		
+		<ol>
+			<li><%= link_to "Chapter 1: Infrastructure", "/chapter1" %></li>
+		</ol>
+		
 		
 		<h2>Current Implementation</h2>
-		<div id="chess"></div>
+		<%= game(1) %>
 	</div>
 	
 </div>
 <div class="clear"></div>
 
 
-<script type="text/javascript">
-	var game = Chess.Game.create();
-	var ai = Chess.AI.create('b', game);
-
-	Chess.Board.create({
-		elt: "#chess",
-		game: game
-	});
-</script>
 
 
 

@@ -1057,7 +1057,12 @@ Chess.Game = function(fen) {
     return nodes;
   }
 
-  var moveHandlers = [];
+  	var moveHandlers = [];
+	function onMove() {
+		for (var i=0; i < moveHandlers.length; i++) {
+			moveHandlers[i]();
+		};
+	}
 
 	return {
 		/***************************************************************************
@@ -1096,7 +1101,9 @@ Chess.Game = function(fen) {
 		},
 
 		reset: function() {
-			return reset();
+			var ret = reset();
+			onMove();
+			return ret;
 		},
 
 		moves: function(settings) {
@@ -1225,9 +1232,7 @@ Chess.Game = function(fen) {
 
 			make_move(move_obj);
 
-			for (var i=0; i < moveHandlers.length; i++) {
-				moveHandlers[i]();
-			};
+			onMove();
 
 			return pretty_move;
 		},

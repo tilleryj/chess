@@ -358,9 +358,9 @@ p {
   -moz-user-select: none;
   font-family: 'Times New Roman';
   font-size: 70px;
-  width: 100px;
-  height: 100px;
-  line-height: 100px;
+  width: 90px;
+  height: 90px;
+  line-height: 90px;
   text-align: center;
 }
 /* line 53, ../../../app/stylesheets/app.scss */
@@ -386,4 +386,19 @@ p {
 /* line 70, ../../../app/stylesheets/app.scss */
 .board tr:nth-child(2n+1) td:nth-child(2n).pieceHover {
   background-color: #99e;
+}
+
+/* line 76, ../../../app/stylesheets/app.scss */
+#sidePanel {
+  float: right;
+  margin-left: 20px;
+}
+/* line 80, ../../../app/stylesheets/app.scss */
+#sidePanel #moveList {
+  width: 200px;
+  height: 360px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  margin-top: 20px;
+  overflow: auto;
 }
