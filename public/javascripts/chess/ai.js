@@ -4,7 +4,8 @@ Chess.AI = {
 	create: function(color, game, implementation) {
 		game.onMove(function() {
 			if (game.turn() == color) {
-				implementation(game, color);
+				var move = implementation(game, color);
+				game.move(move);
 			}
 		});
 	}

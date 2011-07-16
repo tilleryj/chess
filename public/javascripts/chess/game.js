@@ -1278,7 +1278,7 @@ Chess.Game = function(fen) {
 	};
 };
 
-Chess.Game.create = function() {
-	return new Chess.Game();
+Chess.Game.create = function(fen) {
+	return new Chess.Game(fen);
 };
 
