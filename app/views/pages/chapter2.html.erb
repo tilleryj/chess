@@ -1,0 +1,26 @@
+<div class="container_12">
+	<div class="grid_12">
+		<h2>Chapter 2: Scoring</h2>
+		<p>
+			The first step to improving the AI is to build a scoring algorithm and choosing the move with the best score.
+			The simplest scoring algorithm just adds up the value of the pieces on the board. For white pieces: pawn=1,
+			bishop/knight=3, rook=5, queen=9. For black: pawn=-1, bishop/knight=-3, rook=-5, queen=-9.
+			White wants the score to be as high as possible and black wants it as low as possible. To make it more likely
+			for the AI to actually win, checkmate counts as +/-1000 points.
+		</p>
+		
+		<p>
+			Of course this AI will make all sorts of horrible sacrifices. Looking only one move in advance means moves like
+			queen take pawn will be common. On the plus side, the huge value of checkmate means the AI should take
+			all mate in 1 opportunities, and will generally be better than the random AI.
+		</p>
+	
+		<h2>Results</h2>
+		<p>
+			Like the random AI, I beat this one quickly and every time. To make things more interesting I played it against
+			the chapter 1 AI. The results are...
+		</p>
+		
+		<%= game(2) %>
+	</div>
+</div>

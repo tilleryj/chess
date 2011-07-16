@@ -402,3 +402,15 @@ p {
   margin-top: 20px;
   overflow: auto;
 }
+/* line 89, ../../../app/stylesheets/app.scss */
+#sidePanel .newGame {
+  border: 1px solid #ccc;
+  background-color: #eee;
+  padding: 3px;
+  font-size: 11px;
+  margin-top: 15px;
+}
+/* line 96, ../../../app/stylesheets/app.scss */
+#sidePanel .newGame select {
+  margin-bottom: 10px;
+}
