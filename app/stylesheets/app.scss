@@ -34,6 +34,13 @@ p {
 	margin-bottom: 10px;
 }
 
+pre {
+	font-family: courier;
+	background-color: #eee;
+	border: 1px solid #ddd;
+	padding: 10px;
+}
+
 .clear {
 	clear: both;
 }
@@ -75,7 +82,7 @@ p {
 
 #sidePanel {
 	float: right;
-	margin-left: 20px;
+	margin-left: 10px;
 	
 	#moveList {
 		width: 200px;
@@ -89,9 +96,9 @@ p {
 	.newGame {
 		border: 1px solid #ccc;
 		background-color: #eee;
-		padding: 3px;
+		padding: 5px 8px;
 		font-size: 11px;
-		margin-top: 15px;
+		margin-top: 1px;
 		
 		select {
 			margin-bottom: 10px;

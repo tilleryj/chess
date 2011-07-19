@@ -344,15 +344,23 @@ p {
 }
 
 /* line 37, ../../../app/stylesheets/app.scss */
+pre {
+  font-family: courier;
+  background-color: #eee;
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+/* line 44, ../../../app/stylesheets/app.scss */
 .clear {
   clear: both;
 }
 
-/* line 41, ../../../app/stylesheets/app.scss */
+/* line 48, ../../../app/stylesheets/app.scss */
 .board {
   border: 1px solid #000;
 }
-/* line 44, ../../../app/stylesheets/app.scss */
+/* line 51, ../../../app/stylesheets/app.scss */
 .board td {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -363,37 +371,37 @@ p {
   line-height: 84px;
   text-align: center;
 }
-/* line 53, ../../../app/stylesheets/app.scss */
+/* line 60, ../../../app/stylesheets/app.scss */
 .board td span {
   cursor: pointer;
 }
-/* line 57, ../../../app/stylesheets/app.scss */
+/* line 64, ../../../app/stylesheets/app.scss */
 .board td.pieceHover {
   background-color: #99e;
 }
-/* line 61, ../../../app/stylesheets/app.scss */
+/* line 68, ../../../app/stylesheets/app.scss */
 .board tr:nth-child(2n) td:nth-child(2n+1) {
   background-color: #ccc;
 }
-/* line 63, ../../../app/stylesheets/app.scss */
+/* line 70, ../../../app/stylesheets/app.scss */
 .board tr:nth-child(2n) td:nth-child(2n+1).pieceHover {
   background-color: #99e;
 }
-/* line 68, ../../../app/stylesheets/app.scss */
+/* line 75, ../../../app/stylesheets/app.scss */
 .board tr:nth-child(2n+1) td:nth-child(2n) {
   background-color: #ccc;
 }
-/* line 70, ../../../app/stylesheets/app.scss */
+/* line 77, ../../../app/stylesheets/app.scss */
 .board tr:nth-child(2n+1) td:nth-child(2n).pieceHover {
   background-color: #99e;
 }
 
-/* line 76, ../../../app/stylesheets/app.scss */
+/* line 83, ../../../app/stylesheets/app.scss */
 #sidePanel {
   float: right;
-  margin-left: 20px;
+  margin-left: 10px;
 }
-/* line 80, ../../../app/stylesheets/app.scss */
+/* line 87, ../../../app/stylesheets/app.scss */
 #sidePanel #moveList {
   width: 200px;
   height: 360px;
@@ -402,15 +410,15 @@ p {
   margin-top: 20px;
   overflow: auto;
 }
-/* line 89, ../../../app/stylesheets/app.scss */
+/* line 96, ../../../app/stylesheets/app.scss */
 #sidePanel .newGame {
   border: 1px solid #ccc;
   background-color: #eee;
-  padding: 3px;
+  padding: 5px 8px;
   font-size: 11px;
-  margin-top: 15px;
+  margin-top: 1px;
 }
-/* line 96, ../../../app/stylesheets/app.scss */
+/* line 103, ../../../app/stylesheets/app.scss */
 #sidePanel .newGame select {
   margin-bottom: 10px;
 }

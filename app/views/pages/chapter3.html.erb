@@ -1,0 +1,38 @@
+<div class="container_12">
+	<div class="grid_12">
+		<h2>Chapter 3: Look Ahead</h2>
+		<p>
+			Last chapter I introduced the concept of scoring to the AI. Scoring gives the AI the ability to look at a given
+			game position and determine who is winning and by how much. This means that it can determine what the score would
+			be after making every possible legal move and then use that data to choose the "best" one. I'll would call this 
+			looking ahead a half move. The next evolution will be to look ahead a whole move. This means not just looking at the
+			score after the move you make, but also considering the move your opponent will respond with.
+		</p>
+		
+		<p>
+			To implement this look ahead functionality, I essentially need to implement this pseudo code:
+			
+			<pre>
+valid_moves.map(move) {
+	game.move(move)
+	AI[chapter2].move(game)
+	game.score
+}.move_with_max_score</pre>
+		</p>
+		
+		<h2>Results</h2>
+		<p>
+			Looking ahead a full move makes a huge difference. In fact I think the improvement between chapter 2 and 3 is even
+			bigger than the improvement between 1 and 2. I can still win pretty easily, however, I got careless a couple of 
+			times and the AI made me pay. At this point the AI plays very similarly to the average human who knows the rules
+			but hasn't played many games and doesn't know any strategies. I imagine this AI could beat those players, because it 
+			would have the advantage of employing perfect tactics within the scope of one move.
+		</p>
+		
+		<p>
+			Playing chapter 3 against chapter 2 was a blowout. The new AI wins every game, usually in 25-30 moves.
+		</p>
+		
+		<%= game(3) %>
+	</div>
+</div>

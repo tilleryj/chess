@@ -6,6 +6,9 @@
 	<%= javascript_include_tag :defaults %>
 
 	<%= javascript_include_tag "chess/game.js", "chess/board.js", "chess/ai.js" %>
+	<% chapters.each do |c| %>
+		<%= javascript_include_tag "chess/ai/chapter#{c}" %>
+	<% end %>
 
 	<%= csrf_meta_tag %>
 </head>
